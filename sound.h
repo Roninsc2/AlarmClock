@@ -11,6 +11,7 @@ public:
     void SoundPlayed();
     void SoundStop();
     void setFile(const QString& fileName);
+    QMediaPlayer::State getState();
 
 public:
      QString fileAdress = "";

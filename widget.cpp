@@ -8,7 +8,6 @@ TWidget::TWidget(QWidget *parent) :
     Sound()
 {
     ui->setupUi(this);
-    ui->lineEdit->hide();
     ui->stop->hide();
     ui->checkBox_Friday->hide();
     ui->checkBox_Monday->hide();
@@ -18,7 +17,6 @@ TWidget::TWidget(QWidget *parent) :
     ui->checkBox_Tuesday->hide();
     ui->checkBox_Wednesday->hide();
     ui->setTime->hide();
-    ui->hideMusic->hide();
     ui->hideSetTime->hide();
     ui->stop->hide();
     ui->hours->display(Time.currentTime.hour());
@@ -37,9 +35,13 @@ void TWidget::timerEvent(QTimerEvent *)
     Time.updateDateAndTime();
     ui->hours->display(Time.currentTime.hour());
     ui->minutes->display(Time.currentTime.minute());
-    if(Time.ReadyToPlay() && checkToPlay && Sound.fileAdress != "") {
+    if(Time.ReadyToPlay() && Sound.fileAdress != "") {
        Sound.SoundPlayed();
        ui->stop->show();
+       checkToPlay = true;
+    }
+    if(checkToPlay && Sound.getState() == QMediaPlayer::StoppedState) {
+        Sound.SoundPlayed();
     }
     update();
 }
@@ -111,7 +113,6 @@ void TWidget::on_setTime_timeChanged(const QTime &time)
 {
     Time.hoursToPlay = time.hour();
     Time.minuteToPlay = time.minute();
-    checkToPlay = true;
 }
 
 void TWidget::on_setDateandTime_clicked()
@@ -127,8 +128,6 @@ void TWidget::on_setDateandTime_clicked()
     ui->setTime->show();
     ui->setDateandTime->hide();
     ui->hideSetTime->show();
-    ui->hideMusic->hide();
-    ui->lineEdit->hide();
 }
 
 void TWidget::on_hideSetTime_clicked()
@@ -144,8 +143,6 @@ void TWidget::on_hideSetTime_clicked()
     ui->setTime->hide();
     ui->hideSetTime->hide();
     ui->setDateandTime->show();
-    ui->hideMusic->hide();
-    ui->lineEdit->hide();
 }
 
 void TWidget::on_stop_clicked()
@@ -159,20 +156,11 @@ void TWidget::on_setMusic_clicked()
 {
     ui->setDateandTime->hide();
     ui->setMusic->hide();
-    ui->hideMusic->show();
-    ui->lineEdit->show();
-}
-
-void TWidget::on_hideMusic_clicked()
-{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Directory"),
+                                                   "/home", "*.mp3 *.wav");
+    Sound.setFile(fileName);
     ui->setDateandTime->show();
-    ui->hideMusic->hide();
     ui->setMusic->show();
-    ui->lineEdit->hide();
+
 }
 
-
-void TWidget::on_lineEdit_textEdited(const QString &arg1)
-{
-    Sound.setFile(arg1);
-}

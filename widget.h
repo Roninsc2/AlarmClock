@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <activationtime.h>
+#include <QFileDialog>
 #include <QTimer>
 #include <sound.h>
 
@@ -43,8 +44,6 @@ private slots:
     void on_hideSetTime_clicked();
     void on_stop_clicked();
     void on_setMusic_clicked();
-    void on_hideMusic_clicked();
-    void on_lineEdit_textEdited(const QString &arg1);
 };
 
 #endif // WIDGET_H

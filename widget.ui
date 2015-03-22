@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>375</width>
-    <height>468</height>
+    <width>368</width>
+    <height>485</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>368</width>
+    <height>485</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>368</width>
+    <height>485</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Widget</string>
@@ -184,29 +196,6 @@
    </property>
    <property name="text">
     <string>SetMusic</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="hideMusic">
-   <property name="geometry">
-    <rect>
-     <x>38</x>
-     <y>410</y>
-     <width>101</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>hideMusic</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit">
-   <property name="geometry">
-    <rect>
-     <x>12</x>
-     <y>290</y>
-     <width>341</width>
-     <height>27</height>
-    </rect>
    </property>
   </widget>
  </widget>
